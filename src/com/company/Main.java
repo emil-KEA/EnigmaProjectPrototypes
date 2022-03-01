@@ -7,10 +7,10 @@ public class Main {
 
     }
     public void go(){
-        System.out.println(messageToInts("HELLO"));
+        executeTest();
     }
 
-    public String alphabet = " ABCDEFGHIJKLMNOPQRSTUVXYZÆØÅ";
+    public String alphabet = " ABCDEFGHIJKLMNOPQRSTUVXYZÆØÅ ABCDEFGHIJKLMNOPQRSTUVXYZÆØÅ";
 
     public int convertCharToInt(char character){
         for(int i = 0; i < alphabet.length(); i++){
@@ -34,4 +34,16 @@ public class Main {
             messageInt[i] += key;
         }       return messageInt;
     }
+    public String Crypted(int[] cryptedInt){
+        String cryptedMessage = ""; // = new String(String.valueOf(cryptedInt.length));
+        for (int i = 0; i < cryptedInt.length; i++) {
+            cryptedMessage += convertIntTOChar(cryptedInt[i]);
+        }
+        return cryptedMessage;
+    }
+    public void executeTest(){
+        System.out.println(Crypted(cryptWithShift(28,messageToInts("HEJSA"))));
+
+    }
+
 }
