@@ -5,6 +5,7 @@ import java.util.Scanner;
 public class Main {
     Scanner in = new Scanner(System.in);
     String message;
+    String ciphertext;
     int shiftKey;
 
     public static void main(String[] args) {
@@ -14,81 +15,81 @@ public class Main {
         printMainMenu();
         chooseCipher();
     }
-    public void runCaesarCiper(){
+    public void runCaesarCipher(){
         printEncryptOrDecrypt();
         chooseEncryptOrDecryptCaesar();
     }
     public void runCaesarEncryption(){
-        encrypt(getShiftKey(), getEncryptionMessage());
+        getEncryptionMessage();
+        getShiftKey();
+        encrypt(shiftKey, message);
+        printCiphertext();
+        runCaesarCipher();
     }
     public void runCaesarDecryption(){
         System.out.println("TBA");
     }
     public void encrypt(int key, String message) {
-        System.out.println(convertIntArrayToString(addShiftKey(key, messageToInts(message))));
+        ciphertext = convertIntArrayToString(addShiftKey(key, messageToInts(message)));
+    }
+    public void printCiphertext(){
+        System.out.println(ciphertext);
     }
     public void exit(){
         System.out.println("Goodbye!");
     }
-    public void runVigenèreCipher(){
+    public void runVigenereCipher(){
         System.out.println("sorry, not implemented yet");
         exit();
     }
 
 
     public void printMainMenu() {
-        System.out.println("Welcome to EMIL'S ENIGMA MACHINE \n " +
-                "What do you want to do? \n" +
-                "1. enter \"1\" to use CAESAR CIPHER \n" +
-                "2. enter \"2\" to use VIGENÈRE CIPHER \n" +
-                "3. enter \"3\" to EXIT \n");
+        System.out.println("""
+                Welcome to EMIL'S ENIGMA MACHINE\s
+                 What do you want to do?\s
+                1. enter "1" to use CAESAR CIPHER\s
+                2. enter "2" to use VIGENÈRE CIPHER\s
+                3. enter "3" to EXIT\s
+                """);
     }
 
     public void chooseCipher() {
         int choice = in.nextInt();
         switch (choice) {
-            case 1:
-                runCaesarCiper();
-                break;
-            case 2:
-                runVigenèreCipher();
-                break;
-            case 3:
-                exit();
-                break;
-            default:
-                go();
+            case 1 -> runCaesarCipher();
+            case 2 -> runVigenereCipher();
+            case 3 -> exit();
+            default -> go();
         }
     }
     public void printEncryptOrDecrypt(){
-        System.out.println("Do you want to encrypt or decrypt a message or exit to main menu? \n" +
-                "1. enter \"1\" to ENCRYPT \n\"" +
-                "2. enter \"2\" to DECRYPT \n\"" +
-                "3. enter \"3\" to EXIT TO MAIN MENU\n");
+        System.out.println("""
+                Do you want to encrypt or decrypt a message or exit to main menu?\s
+                1. enter "1" to ENCRYPT\s
+                "2. enter "2" to DECRYPT\s
+                "3. enter "3" to EXIT TO MAIN MENU
+                """);
     }
     public void chooseEncryptOrDecryptCaesar(){
         int choice = in.nextInt();
         switch (choice) {
-            case 1:
-                runCaesarEncryption();
-                break;
-            case 2:
-                runCaesarDecryption();
-                break;
-            default:
-                go();
+            case 1 -> runCaesarEncryption();
+            case 2 -> runCaesarDecryption();
+            default -> go();
         }
     }
-    public String getEncryptionMessage(){
+    public void getEncryptionMessage(){
         System.out.print("Enter the message you want to encrypt: ");
-        return getMessage();
+        message = getMessage();
     }
     public String getMessage(){
-        return in.nextLine().toUpperCase();
+        message = in.nextLine().toUpperCase();
+        return in.nextLine();
     }
-    public int getShiftKey(){
+    public void getShiftKey(){
         System.out.print("Enter shift key (between 1 and 29) : ");
-        return in.nextInt();
+        shiftKey = in.nextInt();
     }
 
     public String alphabet = " ABCDEFGHIJKLMNOPQRSTUVXYZÆØÅ ABCDEFGHIJKLMNOPQRSTUVXYZÆØÅ";
@@ -121,8 +122,8 @@ public class Main {
 
     public String convertIntArrayToString(int[] encryptedInt) {
         StringBuilder encryptedMessage = new StringBuilder();
-        for (int i = 0; i < encryptedInt.length; i++) {
-            encryptedMessage.append(convertIntToChar(encryptedInt[i]));
+        for (int j : encryptedInt) {
+            encryptedMessage.append(convertIntToChar(j));
         }
         return encryptedMessage.toString();
     }
