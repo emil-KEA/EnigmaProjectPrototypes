@@ -13,11 +13,7 @@ public class Main {
     public String alphabet = " ABCDEFGHIJKLMNOPQRSTUVXYZÆØÅ ABCDEFGHIJKLMNOPQRSTUVXYZÆØÅ";
 
     public int convertCharToInt(char character){
-        for(int i = 0; i < alphabet.length(); i++){
-            if(character == alphabet.charAt(i)){
-                return i;
-            }
-        } return -1;
+       return alphabet.indexOf(character);
     }
 
     public char convertIntTOChar(int integer){
@@ -29,20 +25,20 @@ public class Main {
             messageInt[i] += convertCharToInt(message.charAt(i));
         } return messageInt;
     }
-    public int[] cryptWithShift(int key, int[] messageInt){
+    public int[] addShiftKey(int key, int[] messageInt){
         for (int i = 0; i < messageInt.length; i++) {
             messageInt[i] += key;
         }       return messageInt;
     }
-    public String Crypted(int[] cryptedInt){
-        String cryptedMessage = ""; // = new String(String.valueOf(cryptedInt.length));
-        for (int i = 0; i < cryptedInt.length; i++) {
-            cryptedMessage += convertIntTOChar(cryptedInt[i]);
+    public String convertIntArrayToString(int[] encryptedInt){
+        String encryptedMessage = "";
+        for (int i = 0; i < encryptedInt.length; i++) {
+            encryptedMessage += convertIntTOChar(encryptedInt[i]);
         }
-        return cryptedMessage;
+        return encryptedMessage;
     }
     public void executeTest(){
-        System.out.println(Crypted(cryptWithShift(28,messageToInts("HEJSA"))));
+        System.out.println(convertIntArrayToString(addShiftKey(28,messageToInts("HEJSA"))));
 
     }
 
