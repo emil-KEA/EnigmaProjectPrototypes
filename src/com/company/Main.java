@@ -9,12 +9,32 @@ public class Main {
 
     public static void main(String[] args) {
         new Main().go();
-
     }
-
     public void go() {
-        executeTest();
+        printMainMenu();
+        chooseCipher();
     }
+    public void runCaesarCiper(){
+        printEncryptOrDecrypt();
+        chooseEncryptOrDecryptCaesar();
+    }
+    public void runCaesarEncryption(){
+        encrypt(getShiftKey(), getEncryptionMessage());
+    }
+    public void runCaesarDecryption(){
+        System.out.println("TBA");
+    }
+    public void encrypt(int key, String message) {
+        System.out.println(convertIntArrayToString(addShiftKey(key, messageToInts(message))));
+    }
+    public void exit(){
+        System.out.println("Goodbye!");
+    }
+    public void runVigenèreCipher(){
+        System.out.println("sorry, not implemented yet");
+        exit();
+    }
+
 
     public void printMainMenu() {
         System.out.println("Welcome to EMIL'S ENIGMA MACHINE \n " +
@@ -59,16 +79,16 @@ public class Main {
                 go();
         }
     }
-    public void getEncryptionMessage(){
+    public String getEncryptionMessage(){
         System.out.print("Enter the message you want to encrypt: ");
-        getMessage();
+        return getMessage();
     }
-    public void getMessage(){
-        message = in.nextLine().toUpperCase();
+    public String getMessage(){
+        return in.nextLine().toUpperCase();
     }
-    public void getShiftKey(){
+    public int getShiftKey(){
         System.out.print("Enter shift key (between 1 and 29) : ");
-        shiftKey = in.nextInt();
+        return in.nextInt();
     }
 
     public String alphabet = " ABCDEFGHIJKLMNOPQRSTUVXYZÆØÅ ABCDEFGHIJKLMNOPQRSTUVXYZÆØÅ";
@@ -105,11 +125,6 @@ public class Main {
             encryptedMessage.append(convertIntToChar(encryptedInt[i]));
         }
         return encryptedMessage.toString();
-    }
-
-    public void executeTest() {
-        System.out.println(convertIntArrayToString(addShiftKey(28, messageToInts("HEJSA"))));
-
     }
 
 }
