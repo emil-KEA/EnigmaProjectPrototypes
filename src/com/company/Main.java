@@ -113,19 +113,16 @@ public class Main {
     public int[] addShiftKey(int key, int[] messageInt) {
         for (int i = 0; i < messageInt.length; i++) {
             messageInt[i] += key;
-            if (messageInt[i] > 29) {
-                messageInt[i] -= 29;
-            }
         }
         return messageInt;
     }
 
+
     public String convertIntArrayToString(int[] encryptedInt) {
-        StringBuilder encryptedMessage = new StringBuilder();
-        for (int j : encryptedInt) {
-            encryptedMessage.append(convertIntToChar(j));
-        }
-        return encryptedMessage.toString();
+        String encryptedMessage = "";
+        for (int i = 0; i < encryptedInt.length; i++) {
+            encryptedMessage += convertIntToChar(encryptedInt[i]);
+        } return encryptedMessage;
     }
 
 }
